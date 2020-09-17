@@ -43,7 +43,6 @@ android {
         }
     }
     buildFeatures {
-        // Enables Jetpack Compose for this module
         compose = true
     }
     compileOptions {
