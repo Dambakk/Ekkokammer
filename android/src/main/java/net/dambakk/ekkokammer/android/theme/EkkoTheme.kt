@@ -8,7 +8,7 @@ fun EkkoTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colors = EkkoColors,
+        colors = MaterialTheme.colors,
         shapes = EkkoShapes,
         content = content
     )

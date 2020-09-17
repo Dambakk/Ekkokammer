@@ -14,11 +14,13 @@ fun Colors.compositedOnSurface(alpha: Float): Color {
 val Yellow800 = Color(0xFFF29F05)
 val Red300 = Color(0xFFEA6D7E)
 
+val primaryPurple = Color(0xFF541B44)
+
 val EkkoColors = darkColors(
-    primary = Yellow800,
+    primary = primaryPurple,
     onPrimary = Color.Black,
-    primaryVariant = Yellow800,
-    secondary = Yellow800,
+    primaryVariant = primaryPurple,
+    secondary = primaryPurple,
     onSecondary = Color.Black,
     error = Red300,
     onError = Color.Black

@@ -6,6 +6,8 @@ plugins {
 group = "net.dambakk.ekkokammer"
 version = "1.0-SNAPSHOT"
 
+val composeVersion = "1.0.0-alpha02"
+
 repositories {
     gradlePluginPortal()
     google()
@@ -18,18 +20,18 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
-    implementation("androidx.compose.ui:ui:1.0.0-alpha03")
-    implementation("androidx.ui:ui-tooling:1.0.0-alpha03")
-    implementation("androidx.compose.foundation:foundation:1.0.0-alpha03")
-    implementation("androidx.compose.material:material:1.0.0-alpha03")
-    implementation("androidx.compose.material:material-icons-core:1.0.0-alpha03")
-    implementation("androidx.compose.material:material-icons-extended:1.0.0-alpha03")
-    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-alpha03")
-    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.0-alpha03")
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.ui:ui-tooling:$composeVersion")
+    implementation("androidx.compose.foundation:foundation:$composeVersion")
+    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.material:material-icons-core:$composeVersion")
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+    implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
+    implementation("androidx.compose.runtime:runtime-rxjava2:$composeVersion")
 
     implementation("dev.chrisbanes.accompanist:accompanist-coil:0.2.2")
 
-    androidTestImplementation("androidx.ui:ui-test:1.0.0-alpha03")
+    androidTestImplementation("androidx.ui:ui-test:$composeVersion")
 }
 android {
     compileSdkVersion(29)
@@ -59,6 +61,6 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.0-alpha03"
+        kotlinCompilerExtensionVersion = "$composeVersion"
     }
 }
