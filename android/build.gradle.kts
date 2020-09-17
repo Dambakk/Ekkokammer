@@ -26,6 +26,9 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.0.0-alpha03")
     implementation("androidx.compose.runtime:runtime-livedata:1.0.0-alpha03")
     implementation("androidx.compose.runtime:runtime-rxjava2:1.0.0-alpha03")
+
+    implementation("dev.chrisbanes.accompanist:accompanist-coil:0.2.2")
+
     androidTestImplementation("androidx.ui:ui-test:1.0.0-alpha03")
 }
 android {

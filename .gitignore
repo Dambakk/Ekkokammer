@@ -14,8 +14,8 @@
 .cxx
 local.properties
 /build/
-android/build/
+android/build/*
 java_pid*
 .idea/markdown-*
-common/build
+common/build/*
 common/build/
