@@ -15,7 +15,7 @@
         android:extractNativeLibs="false"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.Ekko" >
         <activity android:name="net.dambakk.ekkokammer.android.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

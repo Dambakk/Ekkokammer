@@ -18,3 +18,4 @@ android/build/
 java_pid*
 .idea/markdown-*
 common/build
+common/build/
