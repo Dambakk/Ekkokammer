@@ -1,0 +1,2 @@
+net/dambakk/ekkokammer/android/BuildConfig.java
+ net.dambakk.ekkokammer.android.BuildConfig
