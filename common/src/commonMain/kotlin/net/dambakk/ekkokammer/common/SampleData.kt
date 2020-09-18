@@ -8,7 +8,10 @@ val article1 = Article(
     originalUrl = "https://www.nrk.no/tromsogfinnmark/_-karantenereglene-ble-vurdert-av-kokk-1.15164253",
     isBehindPayWall = false,
     provider = "nrk",
-    classifications = emptyList(),
+    classifications = listOf(
+        Classification("id-1", "Hurtigruten", 69),
+        Classification("id-2", "Norge", 15)
+    ),
     isRead = false
 )
 
@@ -19,7 +22,11 @@ val article2 = Article(
     originalUrl = "https://www.nrk.no/vestland/storm-og-regn-i-nord-_-sol-og-20-pluss-i-sor-1.15165082",
     isBehindPayWall = false,
     provider = "nrk",
-    classifications = emptyList(),
+    classifications = listOf(
+        Classification("id-3", "Vær", 1),
+        Classification("id-2", "Norge", 17),
+        Classification("id-3", "Uinteressant", 1)
+    ),
     isRead = false
 )
 
@@ -31,7 +38,10 @@ val article3 = Article(
     originalUrl = "https://direkte.vg.no/nyhetsdognet/news/-man-skulle-ikke-reist-den-17-juli.86Fzxv_fA?utm_source=vgfront&utm_content=row-1",
     isBehindPayWall = false,
     provider = "vg",
-    classifications = emptyList(),
+    classifications = listOf(
+        Classification("id-1", "Hurtigruten", 69),
+        Classification("id-2", "Norge", 15)
+    ),
     isRead = false
 )
 
@@ -42,7 +52,9 @@ val article4 = Article(
     originalUrl = "https://pluss.nettavisen.no/bosniaveteranen-kjartan-ble-skadet-for-livet-folk-vet-ikke-hva-jeg-har-sett-og-opplevd/s/5-8-1379432",
     isBehindPayWall = false,
     provider = "nettavisen",
-    classifications = emptyList(),
+    classifications = listOf(
+        Classification("id-1", "Søppel", 10000)
+    ),
     isRead = false
 )
 
@@ -53,7 +65,10 @@ val article5 = Article(
     originalUrl = "https://www.vg.no/sport/fotball/i/6znW2O/solskjaers-fire-dilemmaer-har-komplisert-situasjonen",
     isBehindPayWall = false,
     provider = "vg",
-    classifications = emptyList(),
+    classifications = listOf(
+        Classification("id-1", "Solskjær", 100),
+        Classification("id-2", "Fotball", 81)
+    ),
     isRead = false
 )
 

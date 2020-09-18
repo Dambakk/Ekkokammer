@@ -8,7 +8,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 
 val primaryPurple = Color(0xFF541B44)
+val secondaryPurple = Color(0xFFE5F8)
 
+val darkCardBackground = Color(0x2C252A)
+val darkChipBackground = Color(0x3E383C)
+val pink = Color(0xE5A4D3)
 
 @Composable
 fun Colors.compositedOnSurface(alpha: Float): Color {
@@ -47,8 +51,9 @@ val LightColors = lightColors(
 )
 
 val DarkColors = darkColors(
-    primary = Red300,
+    primary = primaryPurple,
     primaryVariant = Red700,
+    background = darkCardBackground,
     onPrimary = Color.Black,
     secondary = Red300,
     onSecondary = Color.White,

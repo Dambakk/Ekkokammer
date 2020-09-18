@@ -1,4 +1,4 @@
-package net.dambakk.ekkokammer.android
+package net.dambakk.ekkokammer.android.components
 
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
@@ -57,6 +57,11 @@ fun ArticleCardSmall(
                     ),
                     modifier = Modifier.padding(end = 16.dp)
                 )
+                Row(modifier = Modifier.padding(top = 8.dp)) {
+                    article.classifications.forEach {
+                        Chip(model = ChipModel(text = it.title, numVotes = it.votes))
+                    }
+                }
             }
         }
     }
