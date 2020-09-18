@@ -6,6 +6,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.PreviewParameter
@@ -26,7 +27,8 @@ fun ArticleCardLarge(
         Column {
             CoilImageWithCrossfade(
                 data = article.imageUrl,
-                modifier = Modifier.fillMaxWidth().height(182.dp)
+                modifier = Modifier.fillMaxWidth().height(182.dp),
+                contentScale = ContentScale.Crop
             )
             val cardContentModifier = Modifier.padding(start = 16.dp, end = 16.dp)
             ArticleProviderAndPublishedRow(article, cardContentModifier.padding(top = 16.dp))

@@ -1,12 +1,12 @@
 plugins {
     id("com.android.application")
-    kotlin("android")
+    id("kotlin-android")
     id("kotlin-android-extensions")
 }
 group = "net.dambakk.ekkokammer"
 version = "1.0-SNAPSHOT"
 
-val composeVersion = "1.0.0-alpha02"
+val composeVersion = "1.0.0-alpha03"
 
 repositories {
     gradlePluginPortal()
@@ -17,9 +17,14 @@ repositories {
 dependencies {
     implementation(project(":common"))
     implementation("com.google.android.material:material:1.2.1")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
+    // JetBrains
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
+
+    // Compose:
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.ui:ui-tooling:$composeVersion")
     implementation("androidx.compose.foundation:foundation:$composeVersion")
@@ -28,6 +33,20 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
     implementation("androidx.compose.runtime:runtime-rxjava2:$composeVersion")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+
+    // Androidx
+    val navigationVersion = "2.3.0-alpha01" // TestNavHostController available in alpha
+    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0")
+    implementation("androidx.fragment:fragment-ktx:1.2.5")
+    implementation("androidx.fragment:fragment:1.3.0-alpha08")
+    implementation("androidx.activity:activity:1.2.0-alpha08")
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.core:core-ktx:1.3.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
     implementation("dev.chrisbanes.accompanist:accompanist-coil:0.2.2")
 

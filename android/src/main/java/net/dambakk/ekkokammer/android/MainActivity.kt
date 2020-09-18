@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
+import androidx.navigation.findNavController
 import net.dambakk.ekkokammer.android.components.ArticleCardLarge
 import net.dambakk.ekkokammer.android.components.ArticleCardSmall
 import net.dambakk.ekkokammer.android.theme.EkkoTheme
@@ -23,6 +24,10 @@ import net.dambakk.ekkokammer.android.theme.primaryPurple
 import net.dambakk.ekkokammer.common.Greeting
 import net.dambakk.ekkokammer.common.allArticles
 import net.dambakk.ekkokammer.common.article1
+//import kotlinx.android.synthetic.main.activity_main.*
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 fun greet(): String {
     return Greeting().greeting()
@@ -32,39 +37,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContentView(R.layout.activity_main)
+
         // Going edge-to-edge
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 
-        setContent {
-            EkkoTheme {
-                ScrollableColumn(modifier = Modifier.padding(bottom = 24.dp)) {
-                    EkkoHeader {
-                        Text(
-                            text = "Ekkokammer".toUpperCase(),
-                            modifier = Modifier.align(Alignment.Bottom),
-                            style = MaterialTheme.typography.h5.copy(color = Color.White)
-                        )
-                    }
-                    ArticleCardLarge(article = article1)
-                    LazyColumnFor(items = allArticles) {
-                        ArticleCardSmall(it)
-                    }
-                }
-            }
-        }
+        configureNavigation()
     }
 
-    @Composable
-    fun EkkoHeader(content: @Composable () -> Unit) {
-        Row(
-            modifier = Modifier
-                .height(145.dp)
-                .fillMaxWidth()
-                .background(primaryPurple)
-                .padding(24.dp)
-        ) {
-            content()
-        }
+    private fun configureNavigation() {
+        val navView = findViewById<BottomNavigationView>(R.id.nav_view)
+        val navController = findNavController(R.id.nav_host_fragment)
+        navView.setupWithNavController(navController)
     }
 }
