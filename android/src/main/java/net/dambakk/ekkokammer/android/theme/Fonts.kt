@@ -48,7 +48,7 @@ val ekkoTypography = Typography(
     h5 = TextStyle(
         fontFamily = EkkoFonts,
         fontSize = 24.sp,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Bold,
         lineHeight = 29.sp
     ),
     h6 = TextStyle(
