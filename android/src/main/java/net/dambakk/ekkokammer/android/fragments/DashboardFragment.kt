@@ -62,14 +62,13 @@ class DashboardFragment : Fragment() {
                 EkkoHeader {
                     Text(
                         text = "Ekkokammer".toUpperCase(),
-//                        modifier = Modifier.align(Alignment.Bottom),
                         style = MaterialTheme.typography.h5.copy(color = Color.White)
                     )
                 }
                 val shuffled = allArticles.shuffled()
                 ArticleCardLarge(article = shuffled.first(), onArticleClicked)
                 ArticleCardLarge(article = shuffled[1], onArticleClicked)
-                LazyColumnFor(items = shuffled.drop(2)) {
+                shuffled.drop(2).forEach { 
                     ArticleCardSmall(it, onArticleClicked)
                 }
                 Spacer(modifier = Modifier.height(16.dp))
