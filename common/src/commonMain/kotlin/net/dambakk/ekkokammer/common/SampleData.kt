@@ -50,7 +50,7 @@ val article4 = Article(
     subtitle = null,
     imageUrl = "https://g.acdn.no/obscura/API/dynamic/r1/external/tr_1000_750_l_f/2020-09-16T23%3A02%3A07.000%2B0200/https%3A//smooth-storage.aptoma.no/users/drf-amedia/images/32663207.jpg%3FaccessToken%3D9aa2e026717915efa62636bd7c0f288486482f6d8183eb9d015a8f5375c939ff?chk=C07E03",
     originalUrl = "https://pluss.nettavisen.no/bosniaveteranen-kjartan-ble-skadet-for-livet-folk-vet-ikke-hva-jeg-har-sett-og-opplevd/s/5-8-1379432",
-    isBehindPayWall = false,
+    isBehindPayWall = true,
     provider = "nettavisen",
     classifications = listOf(
         Classification("id-1", "Søppel", 10000)

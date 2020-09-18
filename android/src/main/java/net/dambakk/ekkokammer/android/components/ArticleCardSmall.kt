@@ -1,6 +1,7 @@
 package net.dambakk.ekkokammer.android.components
 
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -12,16 +13,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.PreviewParameter
-import androidx.ui.tooling.preview.PreviewParameterProvider
 import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
 import net.dambakk.ekkokammer.common.Article
-import net.dambakk.ekkokammer.common.article1
-import java.util.*
 
 @Composable
 @Preview
 fun ArticleCardSmall(
-    @PreviewParameter(ArticleProvider::class) article: Article
+    @PreviewParameter(ArticleProvider::class) article: Article,
+    onArticleClicked: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -29,7 +28,11 @@ fun ArticleCardSmall(
             .wrapContentHeight()
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
     ) {
-        Row {
+        Row(
+            modifier = Modifier.clickable(onClick = {
+                onArticleClicked(article.originalUrl)
+            })
+        ) {
             Column {
                 CoilImageWithCrossfade(
                     data = article.imageUrl,

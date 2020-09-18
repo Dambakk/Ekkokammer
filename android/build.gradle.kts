@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("androidx.navigation.safeargs.kotlin")
 }
 group = "net.dambakk.ekkokammer"
 version = "1.0-SNAPSHOT"

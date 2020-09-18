@@ -18,7 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.transition.MaterialElevationScale
 import net.dambakk.ekkokammer.android.R
 import net.dambakk.ekkokammer.android.components.ArticleCardLarge
 import net.dambakk.ekkokammer.android.components.ArticleCardSmall
@@ -33,20 +36,27 @@ class DashboardFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    private val onArticleClicked: (String) -> Unit = { url ->
+        val args = bundleOf("articleUrl" to url)
+        findNavController().navigate(R.id.navigation_article, args)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        exitTransition = MaterialElevationScale(true)
+        reenterTransition = MaterialElevationScale(false)
         (view as ViewGroup).setContent(Recomposer.current()) {
-            Dashboard()
+            Dashboard(onArticleClicked)
         }
         return view
     }
 
     @Composable
-    fun Dashboard() {
+    fun Dashboard(onArticleClicked: (String) -> Unit) {
         EkkoTheme {
             ScrollableColumn {
                 EkkoHeader {
@@ -57,11 +67,12 @@ class DashboardFragment : Fragment() {
                     )
                 }
                 val shuffled = allArticles.shuffled()
-                ArticleCardLarge(article = shuffled.first())
-                ArticleCardLarge(article = shuffled[1])
+                ArticleCardLarge(article = shuffled.first(), onArticleClicked)
+                ArticleCardLarge(article = shuffled[1], onArticleClicked)
                 LazyColumnFor(items = shuffled.drop(2)) {
-                    ArticleCardSmall(it)
+                    ArticleCardSmall(it, onArticleClicked)
                 }
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
