@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
@@ -50,7 +51,11 @@ fun ArticleCardSmall(
                 }
                 Text(
                     text = article.title,
-                    fontSize = 18.sp
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight(600)
+                    ),
+                    modifier = Modifier.padding(end = 16.dp)
                 )
             }
         }

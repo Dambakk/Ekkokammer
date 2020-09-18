@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 
+val primaryPurple = Color(0xFF541B44)
+
+
 @Composable
 fun Colors.compositedOnSurface(alpha: Float): Color {
     return onSurface.copy(alpha = alpha).compositeOver(surface)
@@ -15,7 +18,6 @@ fun Colors.compositedOnSurface(alpha: Float): Color {
 val Yellow800 = Color(0xFFF29F05)
 val Red300 = Color(0xFFEA6D7E)
 
-val primaryPurple = Color(0xFF541B44)
 
 val EkkoColors = darkColors(
     primary = primaryPurple,

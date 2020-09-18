@@ -12,6 +12,7 @@ fun EkkoTheme(
     MaterialTheme(
         colors = if (darkTheme) DarkColors else LightColors,
         shapes = EkkoShapes,
+        typography = ekkoTypography,
         content = content
     )
 }
