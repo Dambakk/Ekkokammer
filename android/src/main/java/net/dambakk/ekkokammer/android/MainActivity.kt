@@ -16,11 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
+import net.dambakk.ekkokammer.android.components.ArticleCardLarge
 import net.dambakk.ekkokammer.android.components.ArticleCardSmall
 import net.dambakk.ekkokammer.android.theme.EkkoTheme
 import net.dambakk.ekkokammer.android.theme.primaryPurple
 import net.dambakk.ekkokammer.common.Greeting
 import net.dambakk.ekkokammer.common.allArticles
+import net.dambakk.ekkokammer.common.article1
 
 fun greet(): String {
     return Greeting().greeting()
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                             style = MaterialTheme.typography.h5.copy(color = Color.White)
                         )
                     }
+                    ArticleCardLarge(article = article1)
                     LazyColumnFor(items = allArticles) {
                         ArticleCardSmall(it)
                     }

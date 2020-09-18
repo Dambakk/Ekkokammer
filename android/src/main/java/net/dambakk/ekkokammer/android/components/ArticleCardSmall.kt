@@ -43,12 +43,7 @@ fun ArticleCardSmall(
             Column(
                 modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
             ) {
-                Row {
-                    val firstLineTextStyle = TextStyle(fontSize = 12.sp )
-                    Text(text = article.provider.capitalize(Locale.getDefault()), style = firstLineTextStyle)
-                    Text(text = " • ", style = firstLineTextStyle)
-                    Text(text = "2 minutter siden", style = firstLineTextStyle)
-                }
+                ArticleProviderAndPublishedRow(article)
                 Text(
                     text = article.title,
                     style = TextStyle(
@@ -57,20 +52,8 @@ fun ArticleCardSmall(
                     ),
                     modifier = Modifier.padding(end = 16.dp)
                 )
-                Row(modifier = Modifier.padding(top = 8.dp)) {
-                    article.classifications.forEach {
-                        Chip(model = ChipModel(text = it.title, numVotes = it.votes))
-                    }
-                }
+                ChipRow(article, Modifier.padding(top = 8.dp))
             }
         }
     }
-}
-
-class ArticleProvider : PreviewParameterProvider<Article> {
-    override val values: Sequence<Article>
-        get() = sequenceOf(article1)
-
-    override val count: Int
-        get() = 1
 }

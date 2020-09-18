@@ -3,7 +3,5 @@
     <style name="EkkoTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:statusBarColor"> @android:color/transparent</item>
         <item name="android:navigationBarColor"> @android:color/transparent</item>
-<!--        <item name="android:windowLightStatusBar">@color/ic_launcher_background</item>-->
-<!--        <item name="android:windowLightNavigationBar">@color/ic_launcher_background</item>-->
     </style>
 </resources>
