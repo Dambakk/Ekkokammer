@@ -78,6 +78,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         useIR = true
+//        freeCompilerArgs = listOf(
+//            "-XXLanguage:+NonParenthesizedAnnotationsOnFunctionalTypes"
+//        )
     }
 
     composeOptions {

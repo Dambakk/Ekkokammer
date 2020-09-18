@@ -2,10 +2,10 @@ package net.dambakk.ekkokammer.common
 
 
 val article1 = Article(
-    title = "Isolerte folk om bord - droppet å teste dem",
-    subtitle = "Hurtigruten fant feil på feil hos seg selv",
-    imageUrl = "https://gfx.nrk.no/0jEhewyi3PdxQ1BHgDVz0wPzb_ShZHbVq7JQ8Q7847wA",
-    originalUrl = "https://www.nrk.no/tromsogfinnmark/_-karantenereglene-ble-vurdert-av-kokk-1.15164253",
+    title = "Nye smitteverntiltak vurderes i Oslo",
+    subtitle = null,
+    imageUrl = "https://gfx.nrk.no/EvXQ8B9sVlcvB68hq3hbnwOAMbVlyScm9gU_avTzahVQ.jpg",
+    originalUrl = "https://www.nrk.no/norge/nye-smitteverntiltak-vurderes-i-oslo-1.15166715",
     isBehindPayWall = false,
     provider = "nrk",
     classifications = listOf(
