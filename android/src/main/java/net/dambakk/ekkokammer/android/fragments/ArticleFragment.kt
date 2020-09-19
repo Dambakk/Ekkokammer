@@ -11,8 +11,6 @@ import net.dambakk.ekkokammer.android.R
 
 class ArticleFragment : Fragment() {
 
-//    val args: ArticleFragmentArgs by NavArgs
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

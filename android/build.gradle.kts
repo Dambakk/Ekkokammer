@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("androidx.navigation.safeargs.kotlin")
+    id("koin")
 }
 group = "net.dambakk.ekkokammer"
 version = "1.0-SNAPSHOT"
@@ -50,6 +51,13 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
     implementation("dev.chrisbanes.accompanist:accompanist-coil:0.2.2")
+
+    val koin_version = "2.1.6"
+    implementation("org.koin:koin-androidx-scope:$koin_version")
+    implementation("org.koin:koin-androidx-viewmodel:$koin_version")
+    implementation("org.koin:koin-androidx-fragment:$koin_version")
+    implementation("org.koin:koin-androidx-ext:$koin_version")
+
 
     androidTestImplementation("androidx.ui:ui-test:$composeVersion")
 }

@@ -15,14 +15,14 @@ import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
 import net.dambakk.ekkokammer.common.Article
 
 @Composable
-@Preview
 fun ArticleCardLarge(
     @PreviewParameter(ArticleProvider::class) article: Article,
+    isRead: Boolean,
     onArticleClicked: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
+            .width(350.dp)
             .wrapContentHeight()
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
     ) {
@@ -37,7 +37,7 @@ fun ArticleCardLarge(
                 contentScale = ContentScale.Crop
             )
             val cardContentModifier = Modifier.padding(start = 16.dp, end = 16.dp)
-            ArticleProviderAndPublishedRow(article, cardContentModifier.padding(top = 16.dp))
+            ArticleProviderAndPublishedRow(article, cardContentModifier.padding(top = 16.dp), isRead)
             Text(
                 text = article.title,
                 style = MaterialTheme.typography.h4,

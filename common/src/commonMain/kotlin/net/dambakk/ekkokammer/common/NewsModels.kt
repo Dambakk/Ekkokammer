@@ -11,9 +11,14 @@ data class Article(
     val isRead: Boolean
 )
 
+
 data class Classification(
     val id: String,
     val title: String,
     val votes: Int
 )
 
+data class TopicModel(
+    val title: String,
+    val isSelected: Boolean
+)

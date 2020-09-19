@@ -14,6 +14,9 @@ buildscript {
         val nav_version = "2.3.0"
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
 
+        val koin_version = "2.1.6"
+        classpath("org.koin:koin-gradle-plugin:$koin_version")
+
     }
 }
 group = "net.dambakk.ekkokammer"

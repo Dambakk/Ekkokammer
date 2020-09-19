@@ -17,9 +17,9 @@ import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
 import net.dambakk.ekkokammer.common.Article
 
 @Composable
-@Preview
 fun ArticleCardSmall(
     @PreviewParameter(ArticleProvider::class) article: Article,
+    isRead: Boolean,
     onArticleClicked: (String) -> Unit
 ) {
     Card(
@@ -46,7 +46,7 @@ fun ArticleCardSmall(
             Column(
                 modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
             ) {
-                ArticleProviderAndPublishedRow(article)
+                ArticleProviderAndPublishedRow(article, isRead = isRead)
                 Text(
                     text = article.title,
                     style = TextStyle(

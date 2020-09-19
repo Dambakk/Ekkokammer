@@ -14,12 +14,16 @@ import net.dambakk.ekkokammer.common.article1
 import java.util.*
 
 @Composable
-fun ArticleProviderAndPublishedRow(article: Article, modifier: Modifier = Modifier) {
+fun ArticleProviderAndPublishedRow(article: Article, modifier: Modifier = Modifier, isRead: Boolean = false) {
     Row(modifier = modifier) {
         val firstLineTextStyle = TextStyle(fontSize = 12.sp)
         Text(text = article.provider.capitalize(Locale.getDefault()), style = firstLineTextStyle)
         Text(text = " • ", style = firstLineTextStyle)
         Text(text = "2 minutter siden", style = firstLineTextStyle)
+        if (isRead){
+            Text(text = " • ", style = firstLineTextStyle)
+            Text(text = "Ferdig lest ✔︎", style = firstLineTextStyle)
+        }
     }
 }
 

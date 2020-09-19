@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -29,6 +30,8 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 import net.dambakk.ekkokammer.android.R
 import net.dambakk.ekkokammer.android.theme.darkCardBackground
 import net.dambakk.ekkokammer.android.theme.primaryPurple
+import net.dambakk.ekkokammer.common.TopicModel
+import net.dambakk.ekkokammer.common.sampleTopics
 
 class TopicsFragment : Fragment() {
 
@@ -38,29 +41,21 @@ class TopicsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_topics, container, false)
         (view as ViewGroup).setContent(Recomposer.current()) {
-            TopicsView()
+            ScrollableColumn {
+                TopicsHeader()
+                TopicsList()
+                Spacer(modifier = Modifier.height(32.dp))
+            }
         }
         return view
     }
 
     @Composable
-    private fun TopicsView() {
+    private fun TopicsList() {
         Column {
-            TopicsHeader()
-
             val topicsModifier =
                 Modifier.padding(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 8.dp)
-            val topics = remember {
-                listOf(
-                    TopicModel("Politikk", true),
-                    TopicModel("Sport", false),
-                    TopicModel("Trump", false),
-                    TopicModel("MeToo", true),
-                    TopicModel("Klima", true),
-                    TopicModel("Hurtigruta", false),
-                    TopicModel("Norge", true),
-                )
-            }
+            val topics = remember { sampleTopics }
             topics.forEach {
                 TopicItem(topicsModifier, it)
                 Divider(color = darkCardBackground)
@@ -84,11 +79,6 @@ class TopicsFragment : Fragment() {
 
         }
     }
-
-    data class TopicModel(
-        val title: String,
-        val isSelected: Boolean
-    )
 
     class TopicProvider : PreviewParameterProvider<TopicModel> {
         override val values: Sequence<TopicModel>
