@@ -8,7 +8,7 @@ plugins {
 group = "net.dambakk.ekkokammer"
 version = "1.0-SNAPSHOT"
 
-val composeVersion = "1.0.0-alpha03"
+val composeVersion = "1.0.0-alpha04"
 
 repositories {
     gradlePluginPortal()

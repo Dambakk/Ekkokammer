@@ -10,7 +10,6 @@ import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.RowScope.align
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Recomposer
@@ -100,7 +99,6 @@ class DashboardFragment : Fragment() {
                 .height(145.dp)
                 .fillMaxWidth()
                 .background(primaryPurple)
-                .align(Alignment.Bottom)
                 .padding(24.dp)
         ) {
             Text(

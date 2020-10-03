@@ -8,7 +8,6 @@ import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.ColumnScope.align
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -44,6 +43,12 @@ class TopicsFragment : Fragment() {
             ScrollableColumn {
                 TopicsHeader()
                 TopicsList()
+                Spacer(modifier = Modifier.height(32.dp))
+                Text(
+                    text = "This app is written using Jetpack Compose 🚀",
+                    color = Color.White,
+                    modifier = Modifier.padding(24.dp)
+                )
                 Spacer(modifier = Modifier.height(32.dp))
             }
         }
@@ -93,10 +98,10 @@ class TopicsFragment : Fragment() {
     ) {
         val (isSelected, setSelected) = remember { mutableStateOf(topic.isSelected) }
         Row(
+            horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .align(Alignment.CenterHorizontally)
                 .toggleable(value = isSelected, onValueChange = setSelected)
                 .then(paddingModifier)
         ) {
@@ -114,7 +119,7 @@ class TopicsFragment : Fragment() {
                 alignment = Alignment.CenterEnd,
                 modifier = Modifier
                     .size(24.dp)
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterVertically)// Alignment.CenterHorizontally)
             )
         }
     }
