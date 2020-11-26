@@ -17,7 +17,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import net.dambakk.ekkokammer.android.AppViewModel
 import net.dambakk.ekkokammer.android.components.ArticleCardLarge
-import net.dambakk.ekkokammer.android.theme.EkkoTheme
 import net.dambakk.ekkokammer.android.theme.primaryPurple
 import net.dambakk.ekkokammer.common.Article
 import net.dambakk.ekkokammer.common.allArticles
@@ -41,23 +40,21 @@ fun Dashboard(
 
     val shuffled = allArticles.shuffled()
 
-    EkkoTheme {
-        ScrollableColumn {
-            EkkoHeader()
-            ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
-                ArticleCardLarge(
-                    article = shuffled[0],
-                    isRead = articlesRead.containsArticleUrl(shuffled[0].originalUrl),
-                    onArticleClicked
-                )
+    ScrollableColumn {
+        EkkoHeader()
+        ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
+            ArticleCardLarge(
+                article = shuffled[0],
+                isRead = articlesRead.containsArticleUrl(shuffled[0].originalUrl),
+                onArticleClicked
+            )
 //                    ArticleCardLarge(article = articles[1], isRead = articlesRead.containsArticleUrl(articles[1].originalUrl), onArticleClicked)
 //                    ArticleCardLarge(article = articles[2], isRead = articlesRead.containsArticleUrl(articles[2].originalUrl), onArticleClicked)
-            }
+        }
 //                articles.drop(3).forEach {
 //                    ArticleCardSmall(it, isRead = articlesRead.containsArticleUrl(it.originalUrl), onArticleClicked)
 //                }
-            Spacer(modifier = Modifier.height(16.dp))
-        }
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 

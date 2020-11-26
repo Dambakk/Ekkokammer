@@ -1,6 +1,7 @@
 package net.dambakk.ekkokammer.android.theme
 
 import androidx.compose.material.Colors
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
@@ -57,5 +58,5 @@ val DarkColors = darkColors(
     onPrimary = Color.Black,
     secondary = Red300,
     onSecondary = Color.White,
-    error = Red200
+    error = Red200,
 )

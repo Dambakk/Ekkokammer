@@ -19,6 +19,8 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.PreviewParameter
 import androidx.ui.tooling.preview.PreviewParameterProvider
 import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.chrisbanes.accompanist.insets.navigationBarsHeight
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import net.dambakk.ekkokammer.android.R
 import net.dambakk.ekkokammer.android.theme.darkCardBackground
 import net.dambakk.ekkokammer.android.theme.primaryPurple
@@ -37,7 +39,10 @@ fun Topics() {
             color = Color.White,
             modifier = Modifier.padding(24.dp)
         )
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier
+            .height(40.dp) // TODO: This does not seem to work correctly
+            .navigationBarsHeight()
+        )
     }
 }
 
