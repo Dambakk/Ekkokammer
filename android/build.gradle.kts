@@ -8,7 +8,8 @@ plugins {
 group = "net.dambakk.ekkokammer"
 version = "1.0-SNAPSHOT"
 
-val composeVersion = "1.0.0-alpha04"
+val composeVersion = "1.0.0-alpha07"
+val accompanistVersion = "0.3.3.1"
 
 repositories {
     gradlePluginPortal()
@@ -37,6 +38,9 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-rxjava2:$composeVersion")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+    implementation("dev.chrisbanes.accompanist:accompanist-coil:$accompanistVersion")
+
+
     // Androidx
     val navigationVersion = "2.3.0-alpha01" // TestNavHostController available in alpha
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
@@ -50,7 +54,6 @@ dependencies {
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
-    implementation("dev.chrisbanes.accompanist:accompanist-coil:0.2.2")
 
     val koin_version = "2.1.6"
     implementation("org.koin:koin-androidx-scope:$koin_version")

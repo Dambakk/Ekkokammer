@@ -7,15 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.ScrollableRow
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Recomposer
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -29,7 +28,6 @@ import io.ktor.util.*
 import net.dambakk.ekkokammer.android.AppViewModel
 import net.dambakk.ekkokammer.android.R
 import net.dambakk.ekkokammer.android.components.ArticleCardLarge
-import net.dambakk.ekkokammer.android.components.ArticleCardSmall
 import net.dambakk.ekkokammer.android.getNrkFrontpage
 import net.dambakk.ekkokammer.android.theme.EkkoTheme
 import net.dambakk.ekkokammer.android.theme.primaryPurple
@@ -46,7 +44,6 @@ class DashboardFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
 
 
     override fun onCreateView(
@@ -66,7 +63,10 @@ class DashboardFragment : Fragment() {
 
             val onArticleClicked: (Article) -> Unit = { article ->
                 appViewModel.addArticleRead(article.originalUrl)
-                Log.d("DashboardFragment", "😀 Number of articles read: ${appViewModel.articlesRead.value?.size}")
+                Log.d(
+                    "DashboardFragment",
+                    "😀 Number of articles read: ${appViewModel.articlesRead.value?.size}"
+                )
                 val args = bundleOf(
                     "articleUrl" to article.originalUrl
                 )
@@ -89,7 +89,11 @@ class DashboardFragment : Fragment() {
             ScrollableColumn {
                 EkkoHeader()
                 ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
-                    ArticleCardLarge(article = articles[0], isRead = articlesRead.containsArticleUrl(articles[0].originalUrl), onArticleClicked)
+                    ArticleCardLarge(
+                        article = articles[0],
+                        isRead = articlesRead.containsArticleUrl(articles[0].originalUrl),
+                        onArticleClicked
+                    )
 //                    ArticleCardLarge(article = articles[1], isRead = articlesRead.containsArticleUrl(articles[1].originalUrl), onArticleClicked)
 //                    ArticleCardLarge(article = articles[2], isRead = articlesRead.containsArticleUrl(articles[2].originalUrl), onArticleClicked)
                 }

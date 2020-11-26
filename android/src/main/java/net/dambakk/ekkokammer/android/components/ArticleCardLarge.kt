@@ -1,17 +1,18 @@
 package net.dambakk.ekkokammer.android.components
 
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.PreviewParameter
-import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
+import coil.imageLoader
+import dev.chrisbanes.accompanist.coil.CoilImage
 import net.dambakk.ekkokammer.common.Article
 
 @Composable
@@ -31,9 +32,11 @@ fun ArticleCardLarge(
                 onArticleClicked(article)
             })
         ) {
-            CoilImageWithCrossfade(
+            CoilImage(
                 data = article.imageUrl,
                 modifier = Modifier.fillMaxWidth().height(182.dp),
+                imageLoader = ContextAmbient.current.imageLoader,
+                fadeIn = true,
                 contentScale = ContentScale.Crop
             )
             val cardContentModifier = Modifier.padding(start = 16.dp, end = 16.dp)

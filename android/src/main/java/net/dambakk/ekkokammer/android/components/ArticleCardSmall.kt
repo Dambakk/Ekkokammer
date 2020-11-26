@@ -1,9 +1,9 @@
 package net.dambakk.ekkokammer.android.components
 
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -11,9 +11,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.PreviewParameter
-import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
+import dev.chrisbanes.accompanist.coil.CoilImage
 import net.dambakk.ekkokammer.common.Article
 
 @Composable
@@ -34,12 +33,13 @@ fun ArticleCardSmall(
             })
         ) {
             Column {
-                CoilImageWithCrossfade(
+                CoilImage(
                     data = article.imageUrl,
                     modifier = Modifier
                         .padding(16.dp)
                         .height(64.dp)
                         .width(64.dp),
+                    fadeIn = true,
                     contentScale = ContentScale.Crop
                 )
             }
