@@ -36,6 +36,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
     implementation("androidx.compose.runtime:runtime-rxjava2:$composeVersion")
+    implementation("androidx.navigation:navigation-compose:1.0.0-alpha02")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     implementation("dev.chrisbanes.accompanist:accompanist-coil:$accompanistVersion")
