@@ -18,7 +18,7 @@ import net.dambakk.ekkokammer.common.Article
 fun ArticleCardLarge(
     @PreviewParameter(ArticleProvider::class) article: Article,
     isRead: Boolean,
-    onArticleClicked: (String) -> Unit
+    onArticleClicked: (Article) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -28,7 +28,7 @@ fun ArticleCardLarge(
     ) {
         Column(
             modifier = Modifier.clickable(onClick = {
-                onArticleClicked(article.originalUrl)
+                onArticleClicked(article)
             })
         ) {
             CoilImageWithCrossfade(

@@ -22,18 +22,23 @@ import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.transition.MaterialElevationScale
+import io.ktor.util.*
 import net.dambakk.ekkokammer.android.AppViewModel
 import net.dambakk.ekkokammer.android.R
 import net.dambakk.ekkokammer.android.components.ArticleCardLarge
 import net.dambakk.ekkokammer.android.components.ArticleCardSmall
+import net.dambakk.ekkokammer.android.getNrkFrontpage
 import net.dambakk.ekkokammer.android.theme.EkkoTheme
 import net.dambakk.ekkokammer.android.theme.primaryPurple
 import net.dambakk.ekkokammer.common.Article
 import net.dambakk.ekkokammer.common.allArticles
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
+@KtorExperimentalAPI
 class DashboardFragment : Fragment() {
 
     private val appViewModel: AppViewModel by viewModel()
@@ -53,13 +58,18 @@ class DashboardFragment : Fragment() {
         exitTransition = MaterialElevationScale(true)
         reenterTransition = MaterialElevationScale(false)
         (view as ViewGroup).setContent(Recomposer.current()) {
+            lifecycleScope.launchWhenResumed {
+                getNrkFrontpage()
+            }
 
             val articlesRead = appViewModel.articlesRead.observeAsState()
 
-            val onArticleClicked: (String) -> Unit = { url ->
-                appViewModel.addArticleRead(url)
+            val onArticleClicked: (Article) -> Unit = { article ->
+                appViewModel.addArticleRead(article.originalUrl)
                 Log.d("DashboardFragment", "😀 Number of articles read: ${appViewModel.articlesRead.value?.size}")
-                val args = bundleOf("articleUrl" to url)
+                val args = bundleOf(
+                    "articleUrl" to article.originalUrl
+                )
                 findNavController().navigate(R.id.navigation_article, args)
             }
 
@@ -71,7 +81,7 @@ class DashboardFragment : Fragment() {
 
     @Composable
     fun Dashboard(
-        onArticleClicked: (String) -> Unit,
+        onArticleClicked: (Article) -> Unit,
         articles: List<Article>,
         articlesRead: State<MutableList<String>?>
     ) {
@@ -80,12 +90,12 @@ class DashboardFragment : Fragment() {
                 EkkoHeader()
                 ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
                     ArticleCardLarge(article = articles[0], isRead = articlesRead.containsArticleUrl(articles[0].originalUrl), onArticleClicked)
-                    ArticleCardLarge(article = articles[1], isRead = articlesRead.containsArticleUrl(articles[1].originalUrl), onArticleClicked)
-                    ArticleCardLarge(article = articles[2], isRead = articlesRead.containsArticleUrl(articles[2].originalUrl), onArticleClicked)
+//                    ArticleCardLarge(article = articles[1], isRead = articlesRead.containsArticleUrl(articles[1].originalUrl), onArticleClicked)
+//                    ArticleCardLarge(article = articles[2], isRead = articlesRead.containsArticleUrl(articles[2].originalUrl), onArticleClicked)
                 }
-                articles.drop(3).forEach {
-                    ArticleCardSmall(it, isRead = articlesRead.containsArticleUrl(it.originalUrl), onArticleClicked)
-                }
+//                articles.drop(3).forEach {
+//                    ArticleCardSmall(it, isRead = articlesRead.containsArticleUrl(it.originalUrl), onArticleClicked)
+//                }
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
@@ -102,7 +112,7 @@ class DashboardFragment : Fragment() {
                 .padding(24.dp)
         ) {
             Text(
-                text = "Ekkokammer".toUpperCase(),
+                text = "Ekkokammer".toUpperCase(Locale.forLanguageTag("nb")),
                 style = MaterialTheme.typography.h5.copy(color = Color.White)
             )
         }

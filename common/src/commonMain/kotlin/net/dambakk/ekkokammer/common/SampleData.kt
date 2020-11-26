@@ -103,7 +103,8 @@ val article7 = Article(
 )
 
 val allArticles = listOf(
-    article1, article2, article3, article4, article5, article6, article7
+//    article1, article2, article3, article4, article5, article6, article7
+    article1
 )
 
 

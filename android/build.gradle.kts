@@ -58,6 +58,8 @@ dependencies {
     implementation("org.koin:koin-androidx-fragment:$koin_version")
     implementation("org.koin:koin-androidx-ext:$koin_version")
 
+    implementation("io.ktor:ktor-client-cio:1.4.0")
+
 
     androidTestImplementation("androidx.ui:ui-test:$composeVersion")
 }
