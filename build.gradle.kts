@@ -11,11 +11,9 @@ buildscript {
         classpath("com.android.tools.build:gradle:4.2.0-alpha16")
         classpath("org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion")
 
-        val nav_version = "2.3.0"
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0")
 
-        val koin_version = "2.1.6"
-        classpath("org.koin:koin-gradle-plugin:$koin_version")
+        classpath("org.koin:koin-gradle-plugin:2.2.0")
 
     }
 }

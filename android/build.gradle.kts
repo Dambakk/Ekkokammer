@@ -22,7 +22,7 @@ dependencies {
     implementation("com.google.android.material:material:1.2.1")
 
     // JetBrains
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
@@ -39,6 +39,7 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     implementation("dev.chrisbanes.accompanist:accompanist-coil:$accompanistVersion")
+    implementation("dev.chrisbanes.accompanist:accompanist-insets:$accompanistVersion")
 
 
     // Androidx
@@ -47,15 +48,14 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0")
-    implementation("androidx.fragment:fragment-ktx:1.2.5")
-    implementation("androidx.fragment:fragment:1.3.0-alpha08")
-    implementation("androidx.activity:activity:1.2.0-alpha08")
+    implementation("androidx.fragment:fragment-ktx:1.3.0-beta01")
+    implementation("androidx.activity:activity-ktx:1.2.0-beta01")
     implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.core:core-ktx:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    implementation("androidx.core:core-ktx:1.3.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
 
-    val koin_version = "2.1.6"
+    val koin_version = "2.2.0"
     implementation("org.koin:koin-androidx-scope:$koin_version")
     implementation("org.koin:koin-androidx-viewmodel:$koin_version")
     implementation("org.koin:koin-androidx-fragment:$koin_version")
@@ -67,11 +67,11 @@ dependencies {
     androidTestImplementation("androidx.ui:ui-test:$composeVersion")
 }
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     defaultConfig {
         applicationId = "net.dambakk.ekkokammer.android"
         minSdkVersion(24)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
     }
