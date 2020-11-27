@@ -24,11 +24,8 @@ fun ArticleCardSmall(
 //    @PreviewParameter(ArticleProvider::class)
     article: Article,
     isRead: Boolean,
-    onArticleClicked: (Article) -> Unit,
-    onArticleClickedTest: (Boolean) -> Unit,
+    onArticleClickedTest: () -> Unit,
 ) {
-
-    val expanded = remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier
@@ -39,8 +36,7 @@ fun ArticleCardSmall(
     ) {
         Row(
             modifier = Modifier.clickable(onClick = {
-                expanded.value = !expanded.value
-                onArticleClickedTest(expanded.value)
+                onArticleClickedTest()
             })
         ) {
             Column {
@@ -68,22 +64,7 @@ fun ArticleCardSmall(
                     ),
                     modifier = Modifier.padding(end = 16.dp)
                 )
-
 //                ChipRow(article, Modifier.padding(top = 8.dp))
-
-                if (expanded.value) {
-                    Text(
-                        text = article.description ?: "",
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight(400)
-                        ),
-                        modifier = Modifier.padding(end = 16.dp),
-                    )
-                    Button(onClick = {onArticleClicked(article)}) {
-                        Text("Les saken")
-                    }
-                }
             }
         }
     }

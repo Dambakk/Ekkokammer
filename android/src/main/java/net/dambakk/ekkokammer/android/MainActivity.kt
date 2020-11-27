@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -22,11 +23,10 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import dev.chrisbanes.accompanist.insets.navigationBarsHeight
 import dev.chrisbanes.accompanist.insets.statusBarsHeight
-import net.dambakk.ekkokammer.android.fragments.ArticleView
-import net.dambakk.ekkokammer.android.fragments.Dashboard
-import net.dambakk.ekkokammer.android.fragments.Topics
+import net.dambakk.ekkokammer.android.screens.Article
+import net.dambakk.ekkokammer.android.screens.Dashboard
+import net.dambakk.ekkokammer.android.screens.Topics
 import net.dambakk.ekkokammer.android.theme.EkkoTheme
-import net.dambakk.ekkokammer.android.theme.Yellow800
 import net.dambakk.ekkokammer.android.theme.pink
 import net.dambakk.ekkokammer.android.theme.primaryPurple
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -44,6 +44,7 @@ val bottomBarNavItems = listOf(
 )
 
 
+@ExperimentalAnimationApi
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,6 +128,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalAnimationApi
     @Composable
     private fun configureNavHost(
         navController: NavHostController,
@@ -141,7 +143,7 @@ class MainActivity : AppCompatActivity() {
             }
             composable(Screen.Topics.route) { Topics() }
             composable(Screen.Article.route) {
-                ArticleView(
+                Article(
                     it.arguments?.getString(
                         "articleUrl"
                     )

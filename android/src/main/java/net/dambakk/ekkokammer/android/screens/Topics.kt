@@ -1,4 +1,4 @@
-package net.dambakk.ekkokammer.android.fragments
+package net.dambakk.ekkokammer.android.screens
 
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.background
@@ -20,7 +20,6 @@ import androidx.ui.tooling.preview.PreviewParameter
 import androidx.ui.tooling.preview.PreviewParameterProvider
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.insets.navigationBarsHeight
-import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import net.dambakk.ekkokammer.android.R
 import net.dambakk.ekkokammer.android.theme.darkCardBackground
 import net.dambakk.ekkokammer.android.theme.primaryPurple

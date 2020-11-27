@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.prof.rssparser.Article
 import com.prof.rssparser.Channel
 import com.prof.rssparser.Parser
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -27,9 +28,12 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     init {
         viewModelScope.launch {
-            val data = Parser().getChannel(nrkRss)
-            _nrkInfo.postValue(data)
-            nrkArticlesLiveData.postValue(data.articles)
+            while (true) {
+                val data = Parser().getChannel(nrkRss)
+                _nrkInfo.postValue(data)
+                nrkArticlesLiveData.postValue(data.articles)
+                delay(5_000)
+            }
         }
     }
 

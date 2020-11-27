@@ -1,6 +1,6 @@
-package net.dambakk.ekkokammer.android.fragments
+package net.dambakk.ekkokammer.android.screens
 
-import android.util.Log
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.ScrollableRow
@@ -16,13 +16,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
-import com.prof.rssparser.Article
 import net.dambakk.ekkokammer.android.AppViewModel
 import net.dambakk.ekkokammer.android.components.ArticleCardLarge
 import net.dambakk.ekkokammer.android.components.ArticleCardSmall
 import net.dambakk.ekkokammer.android.theme.primaryPurple
 import java.util.*
 
+@ExperimentalAnimationApi
 @Composable
 fun Dashboard(
     navController: NavController,
@@ -30,15 +30,6 @@ fun Dashboard(
 ) {
     val articlesRead = appViewModel.articlesRead.observeAsState()
     val articles = appViewModel.nrkArticlesLiveData.observeAsState().value
-
-    val onArticleClicked: (Article) -> Unit = { article ->
-        appViewModel.addArticleRead(article.link ?: "no-link")
-        Log.d(
-            "Dashboard",
-            "😀 Number of articles read: ${appViewModel.articlesRead.value?.size}"
-        )
-        navController.navigate("article/${article.link}")
-    }
 
     if (articles.isNullOrEmpty()) {
         Text(text = "Loading...", color = Color.White)
@@ -48,11 +39,17 @@ fun Dashboard(
             EkkoHeader()
             ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
                 articles.subList(0, 3).forEach {
+                    val expanded = remember { mutableStateOf(false) }
                     ArticleCardLarge(
                         modifier = Modifier.width(350.dp),
                         article = it,
                         isRead = articlesRead.containsArticle(it.link),
-                        onArticleClicked = onArticleClicked
+                        showDescriptionIfAvailable = expanded.value,
+                        onArticleClicked = { expanded.value = !expanded.value },
+                        openArticleAction = { article ->
+                            appViewModel.addArticleRead(article.link ?: "no-link")
+                            navController.navigate("article/${article.link}")
+                        }
                     )
                 }
             }
@@ -60,12 +57,8 @@ fun Dashboard(
                 val expanded = remember { mutableStateOf(false) }
                 Box(modifier = Modifier.animateContentSize()) {
                     if (!expanded.value) {
-                        ArticleCardSmall(
-                            it,
-                            isRead = articlesRead.containsArticle(it.link),
-                            onArticleClicked,
-                        ) { shouldBeExpanded ->
-                            expanded.value = shouldBeExpanded
+                        ArticleCardSmall(it, isRead = articlesRead.containsArticle(it.link)) {
+                            expanded.value = true
                         }
 
                     } else {
@@ -77,6 +70,10 @@ fun Dashboard(
                             showDescriptionIfAvailable = true,
                             onArticleClicked = {
                                 expanded.value = false
+                            },
+                            openArticleAction = { article ->
+                                appViewModel.addArticleRead(article.link ?: "no-link")
+                                navController.navigate("article/${article.link}")
                             }
                         )
                     }
@@ -84,9 +81,7 @@ fun Dashboard(
             }
             Spacer(modifier = Modifier.height((56 + 16 + 16).dp))
         }
-
     }
-
 }
 
 @Composable
