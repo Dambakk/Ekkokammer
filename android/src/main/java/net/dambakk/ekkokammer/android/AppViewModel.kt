@@ -13,6 +13,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import net.dambakk.ekkokammer.common.TopicModel
 import java.nio.charset.Charset
 
 class AppViewModel(app: Application) : AndroidViewModel(app) {
@@ -36,6 +37,21 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
+    var sampleTopics: MutableLiveData<Set<TopicModel>> = MutableLiveData(setOf(
+            TopicModel("Politikk", true),
+            TopicModel("Sport", false),
+            TopicModel("Trump", false),
+            TopicModel("MeToo", true),
+            TopicModel("Klima", true),
+            TopicModel("Hurtigruta", false),
+            TopicModel("Norge", true),
+            TopicModel("Sex", true),
+            TopicModel("Suppe", true),
+            TopicModel("Clickbait", true),
+        ))
+
+    val topics: LiveData<Set<TopicModel>> get() = sampleTopics
 
     val nrkArticles = flow<List<Article>> {
         val data = Parser().getChannel(nrkRss)

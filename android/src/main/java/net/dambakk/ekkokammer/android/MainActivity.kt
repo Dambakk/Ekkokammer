@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity() {
                     appViewModel
                 )
             }
-            composable(Screen.Topics.route) { Topics() }
+            composable(Screen.Topics.route) { Topics(appViewModel) }
             composable(Screen.Article.route) {
                 Article(
                     it.arguments?.getString(

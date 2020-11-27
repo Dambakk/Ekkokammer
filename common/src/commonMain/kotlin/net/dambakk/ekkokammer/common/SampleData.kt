@@ -108,15 +108,5 @@ val allArticles = listOf(
 )
 
 
-val sampleTopics = listOf(
-    TopicModel("Politikk", true),
-    TopicModel("Sport", false),
-    TopicModel("Trump", false),
-    TopicModel("MeToo", true),
-    TopicModel("Klima", true),
-    TopicModel("Hurtigruta", false),
-    TopicModel("Norge", true),
-    TopicModel("Sex", true),
-    TopicModel("Clickbait", true),
-)
+
 

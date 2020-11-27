@@ -8,9 +8,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -37,7 +39,9 @@ fun Dashboard(
 
         ScrollableColumn {
             EkkoHeader()
+            Spacer(modifier = Modifier.height(16.dp))
             ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
+                Spacer(modifier = Modifier.width(16.dp))
                 articles.subList(0, 3).forEach {
                     val expanded = remember { mutableStateOf(false) }
                     ArticleCardLarge(
@@ -51,6 +55,7 @@ fun Dashboard(
                             navController.navigate("article/${article.link}")
                         }
                     )
+                    Spacer(modifier = Modifier.width(16.dp))
                 }
             }
             articles.drop(3).forEach {
@@ -64,7 +69,8 @@ fun Dashboard(
                     } else {
                         ArticleCardLarge(
                             modifier = Modifier
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .padding(top = 16.dp, start = 16.dp, end = 16.dp),
                             article = it,
                             isRead = articlesRead.containsArticle(it.link),
                             showDescriptionIfAvailable = true,
