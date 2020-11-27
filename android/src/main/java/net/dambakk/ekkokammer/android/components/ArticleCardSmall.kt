@@ -1,8 +1,10 @@
 package net.dambakk.ekkokammer.android.components
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +24,8 @@ fun ArticleCardSmall(
 //    @PreviewParameter(ArticleProvider::class)
     article: Article,
     isRead: Boolean,
-    onArticleClicked: (Article) -> Unit
+    onArticleClicked: (Article) -> Unit,
+    onArticleClickedTest: (Boolean) -> Unit,
 ) {
 
     val expanded = remember { mutableStateOf(false) }
@@ -36,11 +39,8 @@ fun ArticleCardSmall(
     ) {
         Row(
             modifier = Modifier.clickable(onClick = {
-                if (!expanded.value) {
-                    expanded.value = true
-                } else {
-                    onArticleClicked(article)
-                }
+                expanded.value = !expanded.value
+                onArticleClickedTest(expanded.value)
             })
         ) {
             Column {
@@ -68,7 +68,8 @@ fun ArticleCardSmall(
                     ),
                     modifier = Modifier.padding(end = 16.dp)
                 )
-                ChipRow(article, Modifier.padding(top = 8.dp))
+
+//                ChipRow(article, Modifier.padding(top = 8.dp))
 
                 if (expanded.value) {
                     Text(
@@ -79,6 +80,9 @@ fun ArticleCardSmall(
                         ),
                         modifier = Modifier.padding(end = 16.dp),
                     )
+                    Button(onClick = {onArticleClicked(article)}) {
+                        Text("Les saken")
+                    }
                 }
             }
         }

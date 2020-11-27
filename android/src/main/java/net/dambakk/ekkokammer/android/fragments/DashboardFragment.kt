@@ -1,16 +1,16 @@
 package net.dambakk.ekkokammer.android.fragments
 
 import android.util.Log
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -28,44 +28,63 @@ fun Dashboard(
     navController: NavController,
     appViewModel: AppViewModel,
 ) {
-
-    val scope = rememberCoroutineScope()
-
     val articlesRead = appViewModel.articlesRead.observeAsState()
+    val articles = appViewModel.nrkArticlesLiveData.observeAsState().value
 
     val onArticleClicked: (Article) -> Unit = { article ->
-        appViewModel.addArticleRead(article.guid ?: "no-id")
+        appViewModel.addArticleRead(article.link ?: "no-link")
         Log.d(
             "Dashboard",
             "😀 Number of articles read: ${appViewModel.articlesRead.value?.size}"
         )
-        navController.navigate("article/${article.guid}")
+        navController.navigate("article/${article.link}")
     }
-
-//    val shuffled = allArticles.shuffled()
-    val articles = appViewModel.nrkArticlesLiveData.observeAsState().value
 
     if (articles.isNullOrEmpty()) {
         Text(text = "Loading...", color = Color.White)
     } else {
+
         ScrollableColumn {
             EkkoHeader()
             ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
-                val firstRow = articles.subList(0, 3)
-                val (first, second, third) = firstRow
-                ArticleCardLarge(
-                    article = first,
-                    isRead = articlesRead.containsArticle(first.guid),
-                    onArticleClicked
-                )
-                    ArticleCardLarge(article = second, isRead = articlesRead.containsArticle(second.guid), onArticleClicked)
-                    ArticleCardLarge(article = third, isRead = articlesRead.containsArticle(third.guid), onArticleClicked)
+                articles.subList(0, 3).forEach {
+                    ArticleCardLarge(
+                        modifier = Modifier.width(350.dp),
+                        article = it,
+                        isRead = articlesRead.containsArticle(it.link),
+                        onArticleClicked = onArticleClicked
+                    )
+                }
             }
             articles.drop(3).forEach {
-                ArticleCardSmall(it, isRead = articlesRead.containsArticle(it.guid), onArticleClicked)
+                val expanded = remember { mutableStateOf(false) }
+                Box(modifier = Modifier.animateContentSize()) {
+                    if (!expanded.value) {
+                        ArticleCardSmall(
+                            it,
+                            isRead = articlesRead.containsArticle(it.link),
+                            onArticleClicked,
+                        ) { shouldBeExpanded ->
+                            expanded.value = shouldBeExpanded
+                        }
+
+                    } else {
+                        ArticleCardLarge(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            article = it,
+                            isRead = articlesRead.containsArticle(it.link),
+                            showDescriptionIfAvailable = true,
+                            onArticleClicked = {
+                                expanded.value = false
+                            }
+                        )
+                    }
+                }
             }
             Spacer(modifier = Modifier.height((56 + 16 + 16).dp))
         }
+
     }
 
 }

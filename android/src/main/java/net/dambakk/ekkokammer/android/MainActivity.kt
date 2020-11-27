@@ -5,14 +5,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.preferredSize
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -27,10 +21,12 @@ import androidx.navigation.compose.*
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import dev.chrisbanes.accompanist.insets.navigationBarsHeight
+import dev.chrisbanes.accompanist.insets.statusBarsHeight
 import net.dambakk.ekkokammer.android.fragments.ArticleView
 import net.dambakk.ekkokammer.android.fragments.Dashboard
 import net.dambakk.ekkokammer.android.fragments.Topics
 import net.dambakk.ekkokammer.android.theme.EkkoTheme
+import net.dambakk.ekkokammer.android.theme.Yellow800
 import net.dambakk.ekkokammer.android.theme.pink
 import net.dambakk.ekkokammer.android.theme.primaryPurple
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -61,10 +57,20 @@ class MainActivity : AppCompatActivity() {
             EkkoTheme {
                 ProvideWindowInsets {
                     Scaffold(
+                        topBar = {
+                            TopAppBar(
+                                backgroundColor = primaryPurple,
+                                elevation = 0.dp,
+                                modifier = Modifier
+                                    .statusBarsHeight()
+                                    .fillMaxWidth()
+                            ) {}
+                        },
                         bottomBar = { EkkoBottomNavigationBar(navController) },
                         bodyContent = { configureNavHost(navController, appViewModel) }
                     )
                 }
+
             }
         }
     }

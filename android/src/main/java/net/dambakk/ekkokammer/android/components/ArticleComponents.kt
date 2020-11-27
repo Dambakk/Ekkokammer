@@ -8,6 +8,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.PreviewParameterProvider
 import com.prof.rssparser.Article
+import com.soywiz.klock.DateFormat
+import com.soywiz.klock.DateFormat.Companion.DEFAULT_FORMAT
+import com.soywiz.klock.parse
 import java.util.*
 
 @Composable
@@ -19,8 +22,10 @@ fun ArticleProviderAndPublishedRow(
     Row(modifier = modifier) {
         val firstLineTextStyle = TextStyle(fontSize = 12.sp)
         Text(text = "NRK"/*article.provider.capitalize(Locale.getDefault())*/, style = firstLineTextStyle)
-        Text(text = " • ", style = firstLineTextStyle)
-        Text(text = "2 minutter siden", style = firstLineTextStyle)
+        article.pubDate?.let {
+            Text(text = " • ", style = firstLineTextStyle)
+            Text(text = DateFormat.DEFAULT_FORMAT.parse(it).format("EEE, d MMM yy HH:mm"), style = firstLineTextStyle)
+        }
         if (isRead) {
             Text(text = " • ", style = firstLineTextStyle)
             Text(text = "Ferdig lest ✔︎", style = firstLineTextStyle)
