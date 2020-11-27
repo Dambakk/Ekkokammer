@@ -64,6 +64,8 @@ dependencies {
 
     implementation("io.ktor:ktor-client-cio:1.4.0")
 
+    implementation("com.prof.rssparser:rssparser:2.1.1")
+
 
     androidTestImplementation("androidx.ui:ui-test:$composeVersion")
 }

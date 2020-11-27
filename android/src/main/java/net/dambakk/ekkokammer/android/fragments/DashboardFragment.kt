@@ -10,16 +10,17 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
+import com.prof.rssparser.Article
 import net.dambakk.ekkokammer.android.AppViewModel
 import net.dambakk.ekkokammer.android.components.ArticleCardLarge
+import net.dambakk.ekkokammer.android.components.ArticleCardSmall
 import net.dambakk.ekkokammer.android.theme.primaryPurple
-import net.dambakk.ekkokammer.common.Article
-import net.dambakk.ekkokammer.common.allArticles
 import java.util.*
 
 @Composable
@@ -27,35 +28,46 @@ fun Dashboard(
     navController: NavController,
     appViewModel: AppViewModel,
 ) {
+
+    val scope = rememberCoroutineScope()
+
     val articlesRead = appViewModel.articlesRead.observeAsState()
 
     val onArticleClicked: (Article) -> Unit = { article ->
-        appViewModel.addArticleRead(article.originalUrl)
+        appViewModel.addArticleRead(article.guid ?: "no-id")
         Log.d(
             "Dashboard",
             "😀 Number of articles read: ${appViewModel.articlesRead.value?.size}"
         )
-        navController.navigate("article/${article.originalUrl}")
+        navController.navigate("article/${article.guid}")
     }
 
-    val shuffled = allArticles.shuffled()
+//    val shuffled = allArticles.shuffled()
+    val articles = appViewModel.nrkArticlesLiveData.observeAsState().value
 
-    ScrollableColumn {
-        EkkoHeader()
-        ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
-            ArticleCardLarge(
-                article = shuffled[0],
-                isRead = articlesRead.containsArticleUrl(shuffled[0].originalUrl),
-                onArticleClicked
-            )
-//                    ArticleCardLarge(article = articles[1], isRead = articlesRead.containsArticleUrl(articles[1].originalUrl), onArticleClicked)
-//                    ArticleCardLarge(article = articles[2], isRead = articlesRead.containsArticleUrl(articles[2].originalUrl), onArticleClicked)
+    if (articles.isNullOrEmpty()) {
+        Text(text = "Loading...", color = Color.White)
+    } else {
+        ScrollableColumn {
+            EkkoHeader()
+            ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
+                val firstRow = articles.subList(0, 3)
+                val (first, second, third) = firstRow
+                ArticleCardLarge(
+                    article = first,
+                    isRead = articlesRead.containsArticle(first.guid),
+                    onArticleClicked
+                )
+                    ArticleCardLarge(article = second, isRead = articlesRead.containsArticle(second.guid), onArticleClicked)
+                    ArticleCardLarge(article = third, isRead = articlesRead.containsArticle(third.guid), onArticleClicked)
+            }
+            articles.drop(3).forEach {
+                ArticleCardSmall(it, isRead = articlesRead.containsArticle(it.guid), onArticleClicked)
+            }
+            Spacer(modifier = Modifier.height((56 + 16 + 16).dp))
         }
-//                articles.drop(3).forEach {
-//                    ArticleCardSmall(it, isRead = articlesRead.containsArticleUrl(it.originalUrl), onArticleClicked)
-//                }
-        Spacer(modifier = Modifier.height(16.dp))
     }
+
 }
 
 @Composable
@@ -76,6 +88,7 @@ fun EkkoHeader() {
 }
 
 
-fun State<MutableList<String>?>.containsArticleUrl(url: String): Boolean {
+fun State<MutableSet<String>?>.containsArticle(url: String?): Boolean {
+    if (url == null) return false
     return value?.contains(url) ?: false
 }

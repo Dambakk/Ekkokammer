@@ -7,8 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.PreviewParameterProvider
-import net.dambakk.ekkokammer.common.Article
-import net.dambakk.ekkokammer.common.article1
+import com.prof.rssparser.Article
 import java.util.*
 
 @Composable
@@ -19,7 +18,7 @@ fun ArticleProviderAndPublishedRow(
 ) {
     Row(modifier = modifier) {
         val firstLineTextStyle = TextStyle(fontSize = 12.sp)
-        Text(text = article.provider.capitalize(Locale.getDefault()), style = firstLineTextStyle)
+        Text(text = "NRK"/*article.provider.capitalize(Locale.getDefault())*/, style = firstLineTextStyle)
         Text(text = " • ", style = firstLineTextStyle)
         Text(text = "2 minutter siden", style = firstLineTextStyle)
         if (isRead) {
@@ -33,16 +32,17 @@ fun ArticleProviderAndPublishedRow(
 @Composable
 fun ChipRow(article: Article, modifier: Modifier = Modifier) {
     Row(modifier = modifier) {
-        article.classifications.forEach {
-            Chip(model = ChipModel(text = it.title, numVotes = it.votes))
-        }
+        Text(text = "Chips coming here")
+//        article.classifications.forEach {
+//            Chip(model = ChipModel(text = it.title, numVotes = it.votes))
+//        }
     }
 }
 
-class ArticleProvider : PreviewParameterProvider<Article> {
-    override val values: Sequence<Article>
-        get() = sequenceOf(article1)
-
-    override val count: Int
-        get() = 1
-}
+//class ArticleProvider : PreviewParameterProvider<Article> {
+//    override val values: Sequence<Article>
+//        get() = sequenceOf(article1)
+//
+//    override val count: Int
+//        get() = 1
+//}

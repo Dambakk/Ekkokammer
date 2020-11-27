@@ -10,14 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.PreviewParameter
 import coil.imageLoader
+import com.prof.rssparser.Article
 import dev.chrisbanes.accompanist.coil.CoilImage
-import net.dambakk.ekkokammer.common.Article
 
 @Composable
 fun ArticleCardLarge(
-    @PreviewParameter(ArticleProvider::class) article: Article,
+//    @PreviewParameter(ArticleProvider::class)
+    article: Article,
     isRead: Boolean,
     onArticleClicked: (Article) -> Unit
 ) {
@@ -32,17 +32,24 @@ fun ArticleCardLarge(
                 onArticleClicked(article)
             })
         ) {
-            CoilImage(
-                data = article.imageUrl,
-                modifier = Modifier.fillMaxWidth().height(182.dp),
-                imageLoader = ContextAmbient.current.imageLoader,
-                fadeIn = true,
-                contentScale = ContentScale.Crop
-            )
+            article.image?.let {
+
+                CoilImage(
+                    data = it,
+                    modifier = Modifier.fillMaxWidth().height(182.dp),
+                    imageLoader = ContextAmbient.current.imageLoader,
+                    fadeIn = true,
+                    contentScale = ContentScale.Crop
+                )
+            }
             val cardContentModifier = Modifier.padding(start = 16.dp, end = 16.dp)
-            ArticleProviderAndPublishedRow(article, cardContentModifier.padding(top = 16.dp), isRead)
+            ArticleProviderAndPublishedRow(
+                article,
+                cardContentModifier.padding(top = 16.dp),
+                isRead
+            )
             Text(
-                text = article.title,
+                text = article.title ?: "No title",
                 style = MaterialTheme.typography.h4,
                 modifier = cardContentModifier.padding(top = 4.dp)
             )

@@ -12,6 +12,7 @@ private val client = HttpClient(CIO) {
 
 }
 
+// TODO: To be removed to the common module so that the deserializing does not interfere with compose
 @KtorExperimentalAPI
 suspend fun getNrkFrontpage(): String {
     val content = client.get<String>("https://www.nrk.no/toppsaker.rss")
@@ -19,18 +20,18 @@ suspend fun getNrkFrontpage(): String {
     return content
 }
 
-@Serializable
-data class Rss(
-    val channel: Channel
-)
+//@Serializable
+//data class Rss(
+//    val channel: Channel
+//)
 
-@Serializable
-data class Channel(
-    val title: String,
-    val link: String,
-    val description: String,
-    val language: String,
-    val lastBuildDate: String,
-    val image: String, //TODO
-    val items: List<String>
-)
+//@Serializable
+//data class Channel(
+//    val title: String,
+//    val link: String,
+//    val description: String,
+//    val language: String,
+//    val lastBuildDate: String,
+//    val image: String, //TODO
+//    val items: List<String>
+//)
