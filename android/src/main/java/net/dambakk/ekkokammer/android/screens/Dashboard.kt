@@ -2,27 +2,29 @@ package net.dambakk.ekkokammer.android.screens
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.ScrollableRow
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnit.Companion.Sp
+import androidx.compose.ui.unit.coerceIn
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import net.dambakk.ekkokammer.android.AppViewModel
 import net.dambakk.ekkokammer.android.components.ArticleCardLarge
 import net.dambakk.ekkokammer.android.components.ArticleCardSmall
 import net.dambakk.ekkokammer.android.theme.primaryPurple
-import java.util.*
+import kotlin.random.Random
 
 @ExperimentalAnimationApi
 @Composable
@@ -30,15 +32,18 @@ fun Dashboard(
     navController: NavController,
     appViewModel: AppViewModel,
 ) {
+    val scrollState = rememberScrollState(0f)
+    val useCollapsingHeader = remember { mutableStateOf(false) }
     val articlesRead = appViewModel.articlesRead.observeAsState()
     val articles = appViewModel.nrkArticlesLiveData.observeAsState().value
 
-    if (articles.isNullOrEmpty()) {
-        Text(text = "Loading...", color = Color.White)
-    } else {
+    val dynamicTextSize = if(useCollapsingHeader.value) (25.sp - Sp(scrollState.value / 20)).coerceIn(10.sp, 25.sp) else 25.sp
 
-        ScrollableColumn {
-            EkkoHeader()
+    ScrollableColumn(scrollState = scrollState) {
+        EkkoHeader(useCollapsingHeader, dynamicTextSize)
+        if (articles.isNullOrEmpty()) {
+            Text(text = "Loading...", color = Color.White)
+        } else {
             Spacer(modifier = Modifier.height(16.dp))
             ScrollableRow(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
                 Spacer(modifier = Modifier.width(16.dp))
@@ -59,7 +64,7 @@ fun Dashboard(
                 }
             }
             articles.drop(3).forEach {
-                val expanded = remember { mutableStateOf(false) }
+                val expanded = remember { mutableStateOf(Random.nextInt(5) % 5 == 0) }
                 Box(modifier = Modifier.animateContentSize()) {
                     if (!expanded.value) {
                         ArticleCardSmall(it, isRead = articlesRead.containsArticle(it.link)) {
@@ -91,18 +96,21 @@ fun Dashboard(
 }
 
 @Composable
-fun EkkoHeader() {
+fun EkkoHeader(useCollapsingHeader: MutableState<Boolean>, dynamicTextSize: TextUnit = 25.sp) {
     Column(
         verticalArrangement = Arrangement.Bottom,
         modifier = Modifier
             .height(145.dp)
             .fillMaxWidth()
+            .clickable(onClick = { useCollapsingHeader.value = !useCollapsingHeader.value })
             .background(primaryPurple)
             .padding(24.dp)
     ) {
         Text(
-            text = "Ekkokammer".toUpperCase(Locale.forLanguageTag("nb")),
-            style = MaterialTheme.typography.h5.copy(color = Color.White)
+            text = "EKKOKAMMER",
+            fontSize = if (useCollapsingHeader.value) dynamicTextSize else 25.sp,
+            color = Color.White,
+            style = MaterialTheme.typography.h5//.copy(color = Color.White)
         )
     }
 }
